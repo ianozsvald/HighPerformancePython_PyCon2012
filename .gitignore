@@ -1,0 +1,8 @@
+*.pyc
+*.c
+*.so
+NOTES.txt
+*.swp
+*.cpp
+*.hpp
+*.html
