@@ -1,5 +1,8 @@
-Source code for High Performance Computing tutorial at EuroPython 2011
+Currently: Source code for High Performance Python 1 tutorial at PyCon 2012
+Originally: Source code for High Performance Computing tutorial at EuroPython 2011
 ian@ianozsvald.com 
+
+NOTE - the following notes still need updating for 2012...
 
 Description:
 The 4 hour tutorial will cover various ways of speeding up the provided Mandelbrot code with a variety of Python packages that let us go from bytecode to C, run on many CPUs and many machines and also use a GPU. The presentation for the tutorial should give the necessary background.
