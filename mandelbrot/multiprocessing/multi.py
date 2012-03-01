@@ -1,4 +1,3 @@
-import itertools
 import multiprocessing
 import sys
 import datetime
@@ -79,7 +78,8 @@ def calc_pure_python(show_output):
         # make sure we get the last few items of data when we have
         # an odd size to chunks (e.g. len(q) == 100 and nbr_chunks == 3
         nbr_chunks += 1
-    chunks = [(q[x*chunk_size:(x+1)*chunk_size], maxiter, z[x*chunk_size:(x+1)*chunk_size]) for x in xrange(nbr_chunks)]
+    chunks = [(q[x*chunk_size:(x+1)*chunk_size], maxiter, z[x*chunk_size:(x+1)*chunk_size]) \
+              for x in xrange(nbr_chunks)]
     print chunk_size, len(chunks), len(chunks[0][0])
 
     # create a Pool which will create Python processes

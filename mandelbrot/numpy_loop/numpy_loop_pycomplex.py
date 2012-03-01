@@ -43,8 +43,8 @@ def calculate_z(q, maxiter, z):
     for i in range(len(q)):
         # zi and qi will be numpy objects unless
         # we convert them into Python complex() objects
-        zi = z[i]
-        qi = q[i]
+        zi = complex(z[i])
+        qi = complex(q[i])
         if i % 1000 == 0:
             # print out some progress info since it is so slow...
             print "%0.2f%% complete" % (1.0/len(q) * i * 100)
