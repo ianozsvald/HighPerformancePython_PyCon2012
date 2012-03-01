@@ -33,6 +33,13 @@ numexpr 1.4.2
 numpy 1.5.1
 pyCUDA HEAD from git as of 14th June 2011 (with CUDA 4.0 drivers)
 PyPy 1.5
-Python 2.7.1
+Python 2.7.2
 ParallelPython 1.6.1
 ShedSkin 0.7.1
+
+UPDATES:
+
+Cython 0.15.1
+pip install cython
+
+TO UPDATE!

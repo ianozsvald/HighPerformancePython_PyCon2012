@@ -7,7 +7,7 @@ def calculate_z(list q, int maxiter, list z):
 
     output = [0] * len(q)
     for i in range(len(q)):
-        zi = complex() #z[i]
+        zi = z[i]
         qi = q[i]
         for iteration in range(maxiter):
             zi = zi * zi + qi

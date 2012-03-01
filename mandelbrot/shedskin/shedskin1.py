@@ -1,5 +1,10 @@
 import sys
 import datetime
+
+# Compilation note:
+# shedskin shedskin1.py
+# -b -w give no improvement
+
 # area of space to investigate
 x1, x2, y1, y2 = -2.13, 0.77, -1.3, 1.3
 
@@ -16,6 +21,7 @@ def calculate_z_serial_purepython(q, maxiter, z):
                 break
     return output
 
+
 def calc_pure_python(show_output):
     # make a list of x and y values which will represent q
     # xx and yy are the co-ordinates, for the default configuration they'll look like:
@@ -24,8 +30,8 @@ def calc_pure_python(show_output):
     # yy = [1.3, 1.2948, 1.2895999999999999, ..., -1.2844000000000058, -1.2896000000000059, -1.294800000000006]
     x_step = (float(x2 - x1) / float(w)) * 2
     y_step = (float(y1 - y2) / float(h)) * 2
-    x=[]
-    y=[]
+    x = []
+    y = []
     ycoord = y2
     while ycoord > y1:
         y.append(ycoord)
@@ -37,10 +43,10 @@ def calc_pure_python(show_output):
     q = []
     for ycoord in y:
         for xcoord in x:
-            q.append(complex(xcoord,ycoord))
+            q.append(complex(xcoord, ycoord))
     z = [0+0j] * len(q)
 
-    print "Total elements:", len(z)    
+    print "Total elements:", len(z)
     start_time = datetime.datetime.now()
     output = calculate_z_serial_purepython(q, maxiter, z)
     end_time = datetime.datetime.now()
@@ -51,25 +57,36 @@ def calc_pure_python(show_output):
     print "Total sum of elements (for validation):", validation_sum
 
     # uncomment this to verify image output, use Python only
-    #if show_output: 
+    #if show_output:
     #    import Image
-    #    import numpy as nm
-    #    output = nm.array(output)
-    #    output = (output + (256*output) + (256**2)*output) * 8
+    #    # convert our output to PIL-compatible input
+    #    import array
+    #    output = ((o + (256*o) + (256**2)*o) * 8 for o in output)
+    #    output = array.array('I', output)
+    #    # display with PIL
     #    im = Image.new("RGB", (w/2, h/2))
-    #    # you can experiment with these x and y ranges
     #    im.fromstring(output.tostring(), "raw", "RGBX", 0, -1)
-    #    #im.save('mandelbrot.png')
     #    im.show()
+
+    return validation_sum
+
 
 if __name__ == "__main__":
     # get width, height and max iterations from cmd line
-    # 'python mandelbrot_shedskin2.py 1000 300'
-    # 'pypy mandelbrot_shedskin2.py 1000 300'
-    # './mandelbrot2 1000 300'
-    w = int(sys.argv[1]) # e.g. 100
-    h = int(sys.argv[1]) # e.g. 100
-    maxiter = int(sys.argv[2]) # e.g. 300
-    
-    # only set show_output to True if we're running through Python
-    calc_pure_python(False)
+    if len(sys.argv) == 1:
+        w = h = 1000
+        maxiter = 1000
+    else:
+        w = int(sys.argv[1])
+        h = int(sys.argv[1])
+        maxiter = int(sys.argv[2])
+
+    # we can show_output for Python, not for PyPy
+    validation_sum = calc_pure_python(True)
+
+    # confirm validation output for our known test case
+    # we do this because we've seen some odd behaviour due to subtle student
+    # bugs
+    if w == 1000 and h == 1000 and maxiter == 1000:
+        assert validation_sum == 1148485 # if False then we have a bug
+
